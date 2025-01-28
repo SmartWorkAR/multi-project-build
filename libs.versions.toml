@@ -1,0 +1,38 @@
+[versions]
+kotlin = "2.1.0"
+ktor = "3.0.3"
+agp = "8.5.2"
+android-minSdk = "24"
+android-compileSdk = "34"
+serialization = "1.8.0"
+logback = "1.5.13"
+
+[libraries]
+
+# Server
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-content-negotiation = {module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor"}
+
+# ktor serialization
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# client
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+
+ktorClientSerialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+
+# kotlin core serialization
+serializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
+serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
+# Logging
+logback-classic = {module = "ch.qos.logback:logback-classic", version.ref="logback" }
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

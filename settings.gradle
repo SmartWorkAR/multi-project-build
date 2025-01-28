@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("libs.versions.toml"))
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = "multi-project-build"
+
+include("backend", "model", "api-client")
