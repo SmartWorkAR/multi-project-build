@@ -5,13 +5,11 @@ plugins {
 
 kotlin {
     jvm()
-//    js(IR) {
-//        browser()
-//        nodejs()
-//    }
+    js(IR) {
+        browser()
+        nodejs()
+    }
 
-    // Apply the default iOS and other Apple targets
-    applyDefaultHierarchyTemplate() // Ensures all iOS targets are configured
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -28,8 +26,6 @@ kotlin {
             dependencies {
                 implementation(project(":model"))
                 implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.cio)
-                //implementation(libs.ktor.client.js)
                 implementation(libs.ktorClientSerialization)
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.ktor.client.content.negotiation)
@@ -38,6 +34,24 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(libs.coroutines.core)
+                implementation(libs.coroutines.test)
+                implementation(libs.ktor.client.mock)
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.cio) // CIO engine for JVM
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(libs.logback.classic)  // Only for JVM tests
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.js)
             }
         }
     }
@@ -54,4 +68,3 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 }
-

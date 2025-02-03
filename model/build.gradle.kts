@@ -6,10 +6,10 @@ plugins {
 
 kotlin {
     jvm()
-//    js(IR) {
-//        browser()
-//        nodejs()
-//    }
+    js(IR) {
+        browser()
+        nodejs()
+    }
 
     applyDefaultHierarchyTemplate()
     iosX64()

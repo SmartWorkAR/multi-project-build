@@ -16,6 +16,9 @@ dependencies {
     implementation(libs.serializationJson)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.logback.classic)
+    testImplementation(kotlin("test"))
+    testImplementation("io.ktor:ktor-server-test-host:3.0.3")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test:3.0.3")
 }
 
 tasks.named<JavaExec>("run") {

@@ -10,3 +10,24 @@ allprojects {
         mavenCentral()
     }
 }
+
+subprojects {
+    tasks.withType<Test> {
+        testLogging {
+            events("passed", "skipped", "failed") // Log events for all test outcomes
+            showStandardStreams = true
+        }
+    }
+}
+
+tasks.register<TestReport>("testReport") {
+    destinationDirectory.set(layout.buildDirectory.dir("reports/tests"))
+
+    // Include results from all subprojects
+    subprojects.forEach { subproject ->
+        val testTask = subproject.tasks.findByName("test")
+        if (testTask is Test) {
+            reportOn(testTask.binaryResultsDirectory)
+        }
+    }
+}
