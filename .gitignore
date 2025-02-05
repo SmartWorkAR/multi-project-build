@@ -10,4 +10,5 @@ local.properties
 */build/
 build
 .kotlin
-kotlin-js-store
+.DS_Store
+/kotlin-js-store/

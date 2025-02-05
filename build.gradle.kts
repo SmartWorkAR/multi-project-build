@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false // Make Kotlin Multiplatform available
     alias(libs.plugins.kotlinJvm) apply false          // Make Kotlin JVM available
@@ -18,6 +20,12 @@ subprojects {
             showStandardStreams = true
         }
     }
+    tasks.withType(KotlinNativeTest::class).configureEach {
+        testLogging {
+            showStandardStreams = true
+            events("passed", "failed", "skipped", "standardOut", "standardError")
+        }
+    }
 }
 
 tasks.register<TestReport>("testReport") {
@@ -31,3 +39,4 @@ tasks.register<TestReport>("testReport") {
         }
     }
 }
+

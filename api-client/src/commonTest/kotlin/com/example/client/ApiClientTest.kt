@@ -14,13 +14,21 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlinx.coroutines.test.runTest // For multiplatform-compatible coroutine testing
 import kotlinx.serialization.json.Json
+//import io.ktor.client.engine.cio.*
 
 expect fun getPlatformName(): String
 
+
 class ApiClientTest {
 
+//    val logger = Logger(
+//        loggerConfigInit(CommonWriter()),
+//        "ApiClientTest"
+//    )
+
+
     private fun createMockHttpClient(): HttpClient {
-        val mockEngine = MockEngine { _ ->
+      val mockEngine = MockEngine { _ ->
             respond(
                 content = """{"id":1,"name":"Example"}""",
                 status = HttpStatusCode.OK,
@@ -29,6 +37,12 @@ class ApiClientTest {
         }
 
         return HttpClient(mockEngine) {
+//            install(Logging) {
+//                logger = object : Logger {
+//                    override fun log(message: String) = kermitLogger.v(message)
+//                }
+//               // level = LogLevel.INFO
+//            }
             install(ContentNegotiation) {
                 json(Json { ignoreUnknownKeys = true })
             }

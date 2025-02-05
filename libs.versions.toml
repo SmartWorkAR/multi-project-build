@@ -7,6 +7,7 @@ android-minSdk = "24"
 android-compileSdk = "34"
 serialization = "1.8.0"
 logback = "1.5.13"
+slf4j = "2.0.16"
 
 [libraries]
 
@@ -40,6 +41,7 @@ serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json
 
 # Logging
 logback-classic = {module = "ch.qos.logback:logback-classic", version.ref="logback" }
+slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

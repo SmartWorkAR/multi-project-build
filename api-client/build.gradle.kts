@@ -1,13 +1,24 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsSubTargetDsl
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
 }
 
+val jsTestConfiguration: KotlinJsSubTargetDsl.() -> Unit = {
+    testTask {
+        useMocha { timeout = "5000" }
+        testLogging {
+            events("passed", "failed", "skipped", "standardOut", "standardError")
+        }
+    }
+}
+
 kotlin {
     jvm()
     js(IR) {
-        browser()
-        nodejs()
+        browser(jsTestConfiguration)
+        nodejs(jsTestConfiguration)
     }
 
     iosX64()
@@ -46,7 +57,12 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation(libs.logback.classic)  // Only for JVM tests
+                implementation(libs.slf4j.nop)
+            }
+        }
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(libs.slf4j.nop)
             }
         }
         val jsMain by getting {
@@ -68,3 +84,4 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 }
+
